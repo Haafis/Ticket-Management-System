@@ -41,6 +41,8 @@ $(document).ready(function() {
             }
         ]
     });
+
+   hidetable();
 });
 
 function RegisterComplaint(event) {
@@ -199,4 +201,12 @@ function DeleteCustomerDetails(id) {
 }
 function Logout(){
    window.location.href = '/index';
+}
+
+function hidetable(){
+        if (userID > 0) {
+           $("#CustomerTableDiv").show();
+        } else {
+           $("#CustomerTableDiv").hide();
+        }
 }

@@ -1,20 +1,18 @@
-//package com.ticket_management_system.model.dto;
-//
-//import lombok.Data;
-//
-//import java.util.Date;
-//
-//@Data
-//public class CustomerTicketStatusDto {
-//    private Integer Ticketid;
-//    private String CustomerName;
-//    private String Complaint;
-//    private Date Solveddate;
-//    private String AgentName;
-//    private String Issue;
-//    private String Status;
-//
-//
-//    public CustomerTicketStatusDto(Integer integer, String s, String s1, Date date, String s2, String s3, String s4) {
-//    }
-//}
+package com.ticket_management_system.model.dto;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Data
+@Entity
+public class CustomerTicketStatusDto {
+    @Id
+    private Integer ticketid;
+    private String customername;
+    private String complaint;
+    private String solveddate;
+    private String agentname;
+    private String issue;
+    private String status;
+}

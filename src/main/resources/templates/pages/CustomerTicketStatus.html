@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint Status - Ticket Management System</title>
+    <title>Ticket Management System</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <!-- DataTables  & Plugins -->
@@ -16,179 +16,176 @@
     <script th:src="@{/plugins/sweetalert2/sweetalert2.all.min.js}"></script>
     <script th:src="@{/customjs/CustomerTicketStatus.js}"></script>
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-    header {
-      background-color: #000000;
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
+        header {
+            background-color: #000;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
 
-    nav {
-      background-color: #333;
-      overflow: hidden;
-    }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
 
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
 
-    nav ul li {
-      float: left;
-    }
+        nav ul li {
+            float: left;
+        }
 
-    nav ul li a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
 
-    nav ul li a:hover {
-      background-color: #575757;
-    }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
 
-    main {
-      padding: 1em;
-    }
+        main {
+            padding: 1em;
+        }
 
-    section {
-      margin-bottom: 2em;
-      background-color: white;
-      padding: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        section {
+            margin-bottom: 2em;
+            background-color: white;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h2 {
-      color: #333;
-    }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+        }
 
-    form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1em;
-    }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
 
-    label {
-      grid-column: span 1;
-    }
+        /* Ticket Info Section */
+        #ticketInfo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1em;
+            text-align: left;
+        }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 0.5em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        #ticketInfo p {
+            margin: 0;
+        }
 
-    button {
-      grid-column: span 2;
-      padding: 0.5em 1em;
-      background-color: #0073e6;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      max-width: 150px; /* Set the max-width for the button */
-      align-self: start; /* Align the button to the start (left) */
-    }
+        /* Button Styling */
+        button {
+            padding: 0.8em 1.5em;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 1em;
+        }
 
-    button:hover {
-      background-color: #005bb5;
-    }
+        button:hover {
+            background-color: #005bb5;
+        }
 
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 1em;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      height: 60px;
-    }
+        /* Responsive Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-    table, th, td {
-      border: 1px solid black;
-    }
+        th {
+            background-color: #f2f2f2;
+        }
 
-    th, td {
-      padding: 8px;
-      text-align: left;
-    }
-
-    .table-container {
-      width: 93%;
-      max-width: 1580px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow-x: auto;
-    }
-
-    .dataTables_wrapper {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    .dataTables_length,
-    .dataTables_filter {
-      margin-bottom: 1em;
-    }
-
-    #AgentTable {
-      width: 100%;
-    }
-  </style>
-
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 60px;
+        }
+                          .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-container h1 {
+            flex: 1;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <div class="header-container">
+        <h1>Customer Ticket Status</h1>
+        <button class="logout-button" onclick="Logout()" style="background-color: grey; color: white;">Logout</button>
+
+    </div>
+</header>
 <script th:inline="javascript">
     /*<![CDATA[*/
     var Ticketid = /*[[${Ticketid}]]*/ null;
     /*]]>*/
 </script>
-<header>
-    <h1>Customer Ticket Status</h1>
-</header>
 <nav>
+    <ul>
+        <!-- Add your navigation links here if needed -->
+    </ul>
 </nav>
-<div class="table-container">
-    <table id="CustomerTicketStatusTable" class="display">
-        <thead>
-        <tr>
-            <th>Serial Number</th>
-            <th>Ticket Id</th>
-            <th>Customer Name</th>
-            <th>Complaint</th>
-            <th>Solved Date</th>
-            <th>Agent Name</th>
-            <th>Issue</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
 
+<main>
+    <section>
+        <div id="ticketInfo">
+            <p><strong>Ticket Id:</strong> <span id="ticketIdDisplay"></span></p>
+            <p><strong> Customer Name:</strong> <span id="fullNameDisplay"></span></p>
+            <p><strong>Complaint:</strong> <span id="ComplaintDisplay"></span></p>
+            <p><strong>Solved Date:</strong> <span id="SolvedDateDisplay"></span></p>
+            <p><strong>Agent Name:</strong> <span id="AgentNameDisplay"></span></p>
+            <p><strong>Issue:</strong> <span id="IssueDisplay"></span></p>
+            <p><strong>Status:</strong> <span id="StatusDisplay"></span></p>
+
+        </div>
+    </section>
+    <button onclick="ReregisterComplaint()">Re-register a Complaint</button>
+</main>
+
+<footer>
+    <p>&copy; 2024 Your Company. All rights reserved.</p>
+</footer>
 
 </body>
 </html>

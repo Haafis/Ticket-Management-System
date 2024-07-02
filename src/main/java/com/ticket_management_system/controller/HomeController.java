@@ -18,10 +18,11 @@ public class HomeController {
         return "/pages/agent";
     }
 
-    @RequestMapping("/PopCustomer")
-    public String Customer() {
-        return "/pages/customer";
-    }
+    @GetMapping(value = "/PopCustomer", params = "userid")
+    public String PopCustomer(@RequestParam("userid") Integer userid, Model model) {
+    model.addAttribute("userid", userid);
+    return "/pages/customer";
+}
     @RequestMapping("/PopAdmin")
     public String Admin() {
         return "/pages/admin";
@@ -58,10 +59,7 @@ public class HomeController {
         return "/pages/CustomerTicketStatus";
     }
 
-//    @RequestMapping("/PopAgentDashBoad")
-//    public String PopAgentDashBoad() {
-//        return "/pages/AgentDashBoad";
-//    }
+
 
     @GetMapping(value = "/PopAgentDashBoad", params = "userid")
     public String PopAgentDashBoad(@RequestParam("userid") Integer userid, Model model) {

@@ -8,7 +8,7 @@ function  LogOut(){
     }
 
     function RegisterComplaint() {
-        window.location.href = 'PopCustomer';
+       window.location.href = '/PopCustomer?userid=0';
     }
 
     function openSearchModal() {
@@ -20,17 +20,12 @@ function  LogOut(){
     }
 
 
-
 function searchTicket() {
     var ticketId = document.getElementById('ticket-id').value;
+
     if (ticketId) {
-        var Ticketid = ticketId.substring(3, 4);
-        alert('Extracted digit: ' + Ticketid);
-
-
-        alert('Searching for Ticket ID: ' + ticketId);
-        window.open('PopCustomerTicketStatus');
-          window.location.href = '/PopCustomerTicketStatus?Ticketid=' + Ticketid;
+        var lastDigit = ticketId.slice(-1);
+        window.location.href = '/PopCustomerTicketStatus?Ticketid=' + lastDigit;
     } else {
         Swal.fire({
             icon: "warning",
@@ -39,12 +34,12 @@ function searchTicket() {
         });
     }
 }
+
 function openTickets(){
 var userid = userID;
     window.location.href = '/PopTickets?userid=' + userid;
 }
 function openCustomer(){
 var userid = userID;
-//    window.location.href = '/PopCustomer?userid=' + userid;
-     window.location.href = '/PopCustomer';
+    window.location.href = '/PopCustomer?userid=' + userid;
 }
