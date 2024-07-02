@@ -6,7 +6,9 @@ import com.ticket_management_system.model.dao.AgentDao;
 import com.ticket_management_system.model.dao.CustomersDao;
 import com.ticket_management_system.model.dto.*;
 import com.ticket_management_system.repository.AgentRepository;
+import com.ticket_management_system.repository.CustomerTicketStatusRepository;
 import com.ticket_management_system.repository.CustomersRepository;
+import com.ticket_management_system.repository.UserRepository;
 import com.ticket_management_system.service.AgentService;
 import com.ticket_management_system.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class CustomersServiceImpl implements CustomersService {
     private CustomersRepository customersRepository;
     @Autowired
     private CustomersConverters customersConverters;
-
+    @Autowired
+    private CustomerTicketStatusRepository customerTicketStatusRepository;
 
 
 //    public String saveCustomerComplaints(CustomersDto customersDto) {
@@ -120,4 +123,10 @@ public class CustomersServiceImpl implements CustomersService {
         }
         return serverMessageDto;
     }
+
+    @Override
+    public CustomerTicketStatusDto getCustomerComplaintStatusByID(Integer id) {
+        return customerTicketStatusRepository.getTicketInfoByCustomerId(id);
+    }
+
 }

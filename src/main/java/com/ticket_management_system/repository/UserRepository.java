@@ -13,4 +13,3 @@ public interface UserRepository extends JpaRepository <UserDao, Integer> {
     List<Object[]> getLoginUsernameAndPassword(@Param("loginRole") String loginRole, @Param("loginUsername") String loginUsername);
 
 }
-
