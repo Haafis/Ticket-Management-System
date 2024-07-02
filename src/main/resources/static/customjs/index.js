@@ -8,7 +8,7 @@ function  LogOut(){
     }
 
     function RegisterComplaint() {
-        window.location.href = 'PopCustomer';
+       window.location.href = '/PopCustomer?userid=0';
     }
 
     function openSearchModal() {
@@ -45,6 +45,5 @@ var userid = userID;
 }
 function openCustomer(){
 var userid = userID;
-//    window.location.href = '/PopCustomer?userid=' + userid;
-     window.location.href = '/PopCustomer';
+    window.location.href = '/PopCustomer?userid=' + userid;
 }
