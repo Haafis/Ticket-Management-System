@@ -1,7 +1,9 @@
 # Ticket-Management-System
 Ticket Management System
+
 Introduction
 The Ticket Management System is a web application designed to help organizations manage support tickets effectively. This system allows support agents to track and resolve customer issues, ensuring efficient customer service. The application is designed to be used by administrators, support agents, and customers.
+
 System Overview
 The system is divided into four main modules:
 1.	Admin
@@ -12,6 +14,7 @@ The Admin module is responsible for managing agents, while agents can manage tic
 •	To access this project, navigate to http://localhost:3999/index.
 •	The Swagger UI for API documentation can be accessed at http://localhost:3999/swagger-ui/index.html#/.
 •	The database connection string is jdbc:mysql://${MYSQL_HOST:localhost}:3313/ticketmanagementsystem.
+
 Workflow
 1.	Access the project at http://localhost:3999/index.
 2.	On the right side, login or sign up as an administrator.
@@ -20,6 +23,7 @@ Workflow
 5.	Register a complaint and add customer details in the customer module. After saving the complaint, a ticket ID is generated.
 6.	Login as an agent to see customer complaints and solve them in the agent module.
 7.	After solving the complaint, the customer can search with the ticket ID to see the ticket status.
+	
 Database Design
 The database consists of the following tables:
 CREATE  TABLE `agent` (
@@ -70,6 +74,7 @@ CREATE TABLE `users` (
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userid`)
 );
+
 API Design
 The API follows RESTful principles and includes the following endpoints:
 User Controller
