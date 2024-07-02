@@ -57,4 +57,15 @@ public class HomeController {
         model.addAttribute("Ticketid", Ticketid);
         return "/pages/CustomerTicketStatus";
     }
+
+//    @RequestMapping("/PopAgentDashBoad")
+//    public String PopAgentDashBoad() {
+//        return "/pages/AgentDashBoad";
+//    }
+
+    @GetMapping(value = "/PopAgentDashBoad", params = "userid")
+    public String PopAgentDashBoad(@RequestParam("userid") Integer userid, Model model) {
+        model.addAttribute("userid", userid);
+        return "/pages/AgentDashBoad";
+    }
 }

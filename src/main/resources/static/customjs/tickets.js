@@ -17,7 +17,7 @@ $(document).ready(function() {
         },
         "columns": [
             { "data": null, "title": "Serial Number", "width": "5%" },
-            { "data": "id", "title": "Ticket Id", "width": "10%", "render": function(data, type, row) { return "AB#" + data + "2024"; } },
+            { "data": "id", "title": "Ticket Id", "width": "10%", "render": function(data, type, row) { return "AB#2024" + data + ""; } },
             {
                 "data": null,
                 "title": "Full Name",
@@ -56,3 +56,6 @@ function SolveTicketIssue(customerid, userID) {
    window.location.href = 'PopManageTickets?customerid=' + customerid + '&userID=' + userID;
 }
 
+function Logout(){
+   window.location.href = '/index';
+}
