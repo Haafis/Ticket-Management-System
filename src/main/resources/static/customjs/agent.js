@@ -248,3 +248,6 @@ function DeleteAgentDetails(id) {
     });
 }
 
+function Logout(){
+   window.location.href = '/index';
+}

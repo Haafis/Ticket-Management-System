@@ -101,7 +101,7 @@ function RegisterComplaint(event) {
             if (response.successFlag == 1) {
                 Swal.fire({
                     title: "Success!",
-                    html: "Ticket ID: <strong>AB#" + response.masterID + "2024</strong><br><br>" +
+                    html: "Ticket ID: <strong>AB#2024" + response.masterID + "</strong><br><br>" +
                           "<p>Please note this Ticket ID for further enquiry.</p>" +
                           "<button id='copyButton' class='swal2-confirm swal2-styled' onclick='copyTicketID(" + response.masterID +")'>Copy Ticket#</button>",
                     icon: "success",
@@ -139,7 +139,7 @@ function clearAll() {
 }
 
 function copyTicketID(id) {
-    var ticketID = "AB#" + id + "2024";
+    var ticketID = "AB#2024" + id + "";
     navigator.clipboard.writeText(ticketID).then(() => {
         Swal.fire({
             title: "Copied!",
@@ -196,4 +196,7 @@ function DeleteCustomerDetails(id) {
         error: function(xhr, status, error) {
         }
     });
+}
+function Logout(){
+   window.location.href = '/index';
 }

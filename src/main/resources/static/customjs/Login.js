@@ -100,7 +100,8 @@ function Login(event) {
                 if (role === "1") {
                     window.location.href = '/PopDashboard?userid=' + userid;
                 } else if (role === "2") {
-                    window.location.href = '/PopTickets?userid=' + userid;
+//                    window.location.href = '/PopTickets?userid=' + userid;
+                  window.location.href = '/PopAgentDashBoad?userid=' + userid;
                 } else {
                     Swal.fire({
                         icon: "warning",

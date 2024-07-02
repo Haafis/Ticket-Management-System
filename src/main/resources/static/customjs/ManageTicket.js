@@ -1,5 +1,4 @@
 
-
 var ManageComplaintsTable;
 
 $(document).ready(function() {
@@ -31,7 +30,7 @@ $(document).ready(function() {
                     if (data) {
                         var date = new Date(data);
                         var day = String(date.getDate()).padStart(2, '0');
-                        var month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                        var month = String(date.getMonth() + 1).padStart(2, '0');
                         var year = date.getFullYear();
                         return day + '-' + month + '-' + year;
                     }
@@ -58,7 +57,16 @@ $(document).ready(function() {
                     return displayIndex;
                 }
             }
-        ]
+        ],
+        "drawCallback": function(settings) {
+            var api = this.api();
+            var dataCount = api.data().count();
+            if (dataCount > 0) {
+                $('#Submitid').hide();
+            } else {
+                $('#Submitid').show();
+            }
+        }
     });
     CustomerDetails();
 });
@@ -96,6 +104,7 @@ function ManageComplaints() {
         data: jsonData,
         success: function(response, status) {
             if (response == "Status added successfully") {
+            $('#Submitid').hide();
            Swal.fire({
                 title: "Success!",
                 text:"Status added successfully",
@@ -114,6 +123,7 @@ function ManageComplaints() {
 
 
 function EditManageComplaintsDetails(id) {
+   $('#Submitid').show();
     $('#id').val(id);
     $.ajax({
         type: "GET",
@@ -179,7 +189,7 @@ function CustomerDetails() {
         contentType: "application/json",
         data: { id: id },
         success: function(response) {
-            var TicketId = "AB#" + response.id + "2024";
+            var TicketId = "AB#2024" + response.id + "";
             $("#ticketIdDisplay").text(TicketId);
             $("#fullNameDisplay").text(response.firstname + " " + response.lastname);
             $("#emailDisplay").text(response.email);
@@ -190,4 +200,7 @@ function CustomerDetails() {
             console.error("Error fetching customer details: ", error);
         }
     });
+}
+function Logout(){
+   window.location.href = '/index';
 }
