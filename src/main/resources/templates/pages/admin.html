@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent - Ticket Management System</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <!-- DataTables  & Plugins -->
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/bs4/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <script th:src="@{/plugins/sweetalert2/sweetalert2.all.min.js}"></script>
+  <script th:src="@{/customjs/agent.js}"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #000000;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      float: left;
+    }
+
+    nav ul li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      background-color: #575757;
+    }
+
+    main {
+      padding: 1em;
+    }
+
+    section {
+      margin-bottom: 2em;
+      background-color: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+    }
+
+    label {
+      grid-column: span 1;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      grid-column: span 2;
+      padding: 0.5em 1em;
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      max-width: 150px; /* Set the max-width for the button */
+      align-self: start; /* Align the button to the start (left) */
+    }
+
+    button:hover {
+      background-color: #005bb5;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      height: 60px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .table-container {
+      width: 93%;
+      max-width: 1580px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+
+    .dataTables_wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .dataTables_length,
+    .dataTables_filter {
+      margin-bottom: 1em;
+    }
+
+    #AgentTable {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Manage Agents</h1>
+</header>
+<nav>
+  <ul>
+<!--    <li><a href="PopDashboard">Home</a></li>-->
+  </ul>
+</nav>
+<main>
+  <section>
+    <form id="agent-form">
+      <input type="hidden" id="id" name="id" value="0">
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" name="firstname" required>
+
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" name="lastname" required>
+
+      <label for="username">User Name:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phonenumber">Phone Number:</label>
+      <input type="tel" id="phonenumber" name="phonenumber" required>
+
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" required>
+
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+      </select>
+
+      <label for="department">Department:</label>
+      <input type="text" id="department" name="department" required>
+
+      <label for="dateofjoining">Date of Joining:</label>
+      <input type="date" id="dateofjoining" name="dateofjoining" required>
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" required></textarea>
+
+      <button type="button" id="Addagentid" onclick="addAgent(event)">Add Agent</button>
+    </form>
+  </section>
+</main>
+
+
+<div class="table-container">
+  <table id="AgentTable" class="display">
+    <thead>
+    <tr>
+      <th>Serial Number</th>
+      <th>Name</th>
+      <th>User Name</th>
+      <th>Password</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Department</th>
+      <th>Date of Joining</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
