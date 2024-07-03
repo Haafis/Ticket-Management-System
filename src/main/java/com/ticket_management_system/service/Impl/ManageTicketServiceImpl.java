@@ -26,26 +26,6 @@ public class ManageTicketServiceImpl implements ManageTicketService {
 
 
 
-//    public String saveComplaintStatus(TicketManageDto ticketManageDto) {
-//        if (ticketManageDto.getId() == 0) {
-//            TicketManageDao ticketManageDao = manageTicketConverters.toTicketManageDao(ticketManageDto);
-//            manageTicketRepository.save(ticketManageDao);
-//        } else {
-//            Optional<TicketManageDao> optionalTicketManageDao = manageTicketRepository.findById(ticketManageDto.getId());
-//            if (optionalTicketManageDao.isPresent()) {
-//                TicketManageDao ticketManageDao = optionalTicketManageDao.get();
-//                ticketManageDao.setIssueSolvedDate(ticketManageDto.getIssueSolvedDate());
-//                ticketManageDao.setStatus(ticketManageDto.getStatus());
-//                ticketManageDao.setDescription(ticketManageDto.getDescription());
-//                manageTicketRepository.save(ticketManageDao);
-//            } else {
-//                return "ComplaintStatus with ID " + ticketManageDto.getId() + " not found.";
-//            }
-//        }
-//        return "Complaint Status saved successfully.";
-//    }
-
-
     @Override
     public String saveComplaintStatus(TicketManageDto ticketManageDto) {
         if (ticketManageDto.getId() == 0) {
